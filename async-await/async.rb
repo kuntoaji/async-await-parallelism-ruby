@@ -1,14 +1,14 @@
 require 'async'
 
-# Instead of taking 3 seconds, this program takes 1 second in total.
-# The main loop executes rapidly creating 3 child tasks, and then each
-# child task sleeps for 1 second before printing "Hello World".
+puts "Start: #{Time.now}"
 
 Async do
-	3.times do |i|
-		Async do
-			sleep 1
-			puts "Hello World #{i}"
-		end
-	end
+  3.times do |i|
+    Async do |task|
+      task.sleep 5
+      puts "Hello World #{i} - #{Time.now}"
+    end
+  end
 end
+
+puts "End: #{Time.now}"
